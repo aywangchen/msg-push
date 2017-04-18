@@ -1,6 +1,7 @@
 package com.shide.listener;
 
 import com.shide.jPush.service.JpushServive;
+import org.apache.log4j.Logger;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -14,6 +15,8 @@ public class QueueMessageListener implements MessageListener {
 
     private JpushServive jpushServive;
 
+    Logger logger = Logger.getLogger(QueueMessageListener.class);
+
     public void setJpushServive(JpushServive jpushServive) {
         this.jpushServive = jpushServive;
     }
@@ -23,7 +26,9 @@ public class QueueMessageListener implements MessageListener {
 
         TextMessage tm = (TextMessage) message;
         try {
-            System.out.println("QueueMessageListener监听到了文本消息：\t"
+            /*System.out.println("QueueMessageListener监听到了文本消息：\t"
+                    + tm.getText());*/
+            logger.info("QueueMessageListener监听到了文本消息：\t"
                     + tm.getText());
             //do something ...
             jpushServive.sendMsgPush(tm.getText());

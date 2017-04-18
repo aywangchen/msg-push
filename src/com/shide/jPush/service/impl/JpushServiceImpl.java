@@ -17,9 +17,11 @@ import javax.jms.Destination;
  */
 public class JpushServiceImpl implements JpushServive {
 
+    @Autowired
+    private MessagePush messagePush;
+
     public void sendMsgPush(String msg) {
         try {
-            MessagePush messagePush = new MessagePush(1);
             MsgDTO msgDTO = JSON.parseObject(msg, MsgDTO.class);
             messagePush.sendMsgPush(msgDTO);
         } catch (Exception e) {
